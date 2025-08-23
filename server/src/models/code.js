@@ -1,12 +1,21 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+
 
 const codeSchema = new mongoose.Schema(
-    {
-        code    : { type: string , unique: true , requried: true  },
-        points  : { type : numbers , requried: true , defult: 0 },
-        isUsed  : { type: boolean , defult: false },
-        useBy   : { type :mongoose.Schema.Types.uderId , ref:"user"},
-        useAt   : { type : Date  },
-    }
+{
+code: { type: String, required: true, unique: true, uppercase: true, trim: true },
+points: { type: Number, required: true, min: 1 },
+expiresAt: { type: Date },
+used: { type: Boolean, default: false },
+usedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+usedAt: { type: Date },
+createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+},
+{ timestamps: true }
 );
-export default mongoose.model("code" , codeSchema);
+
+
+codeSchema.index({ expiresAt: 1 });
+
+
+export default mongoose.model('Code', codeSchema);

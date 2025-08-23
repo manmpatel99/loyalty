@@ -1,11 +1,19 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose';
+
 
 const redemptionSchema = new mongoose.Schema(
-    {
-        userId : { type:mongoose.Schema.Typpe.ObjectId , ref:"user"},
-        codeId : { type:mongoose.Schema.Types.ObjectId , ref:"code"},
-        Ponits : { type:numbers , required:true}
-    }
+{
+user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+code: { type: mongoose.Schema.Types.ObjectId, ref: 'Code', required: true },
+points: { type: Number, required: true },
+kind: { type: String, enum: ['earn', 'adjust'], default: 'earn' },
+note: { type: String, trim: true }
+},
+{ timestamps: true }
 );
 
-export default mongoose.model("redemtion" , redemptionSchema);
+
+redemptionSchema.index({ user: 1, createdAt: -1 });
+
+
+export default mongoose.model('Redemption', redemptionSchema);
