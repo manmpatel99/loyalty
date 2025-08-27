@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import PosDevice from '../models/PosDevice.js'; 
 import { generateCode, posKeyId } from '../utils/generateCode.js';
-
+import { earnHandler } from './earn.controller.js';
 
 export async function createPosDevice(){
         const viaRole = req.user && req.user.role === 'admin';
@@ -77,6 +77,9 @@ export async function createPosDevice(){
         return res.json({ ok: true, device: { id: device._id.toString(), name: device.name, active: device.active } });
     }
 
+    export async function posPaid(req, res) { 
+        return earnHandler(req, res);
+     }
 
 
  export default createPosDevice;

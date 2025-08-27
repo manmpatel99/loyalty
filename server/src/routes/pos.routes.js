@@ -32,6 +32,9 @@ router.post(
 );
 
 
+
+r.post('/paid', requireAuth, posPaid);
+
 router.get('/devices', asyncHandler(listPosDevices));
 
 
