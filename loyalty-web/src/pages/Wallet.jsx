@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import api from '../../lib/api'
+import api from '../lib/api'
 const cents = n => (n/100).toFixed(2)
 
 export default function Wallet(){

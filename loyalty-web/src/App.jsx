@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/Login.jsx'
-import Wallet from './pages/user/Wallet.jsx'
-import Redeem from './pages/user/Redeem.jsx'
+import Wallet from './pages/Wallet.jsx'
+import Redeem from './pages/Redeem.jsx'
 import Profile from './pages/user/Profile.jsx'
 import Promotions from './pages/merchant/Promotions.jsx'
 import Transactions from './pages/merchant/Transactions.jsx'
@@ -21,6 +21,7 @@ export default function App(){
     <>
       {authed() && <Nav/>}
       <Routes>
+        <Route path="/signup" element={<Signup/>} />
         <Route path="/login" element={<Login/>} />
         {/* User */}
         <Route path="/" element={<Guard allow={['user','merchant','admin']}><Wallet/></Guard>} />
